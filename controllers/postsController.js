@@ -1,4 +1,5 @@
 const Post = require('../models/postsModel');
+const User = require('../models/usersModel');
 const {
   allSuccess,
   returnDataSuccess,
@@ -38,13 +39,12 @@ const postsController = {
       ) {
         allError(400, res, '貼文內容和貼文圖片至少有一項須填寫');
       } else {
-        await Post.create({
-          userName: dataFormFront.userName,
-          userPhoto: dataFormFront.userPhoto,
+        const result = await Post.create({
+          user: dataFormFront.user,
           postContent: dataFormFront.postContent,
           postImgUrl: dataFormFront.postImgUrl,
         });
-        allSuccess(res, '成功新增一筆資料');
+      returnDataSuccess(res, '成功新增一筆資料', result);
       }
     } catch (err) {
       allError(400, res, err);
