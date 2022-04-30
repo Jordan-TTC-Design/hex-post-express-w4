@@ -21,14 +21,14 @@ const PostSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    updateAt: {
+    updatedAt: {
       time: {
         type: Date,
         default: Date.now,
       },
       edit: { type: Boolean, default: false },
     },
-    createAt: {
+    createdAt: {
       type: Date,
       default: Date.now,
     },

@@ -9,7 +9,12 @@ const postsController = {
   // 取得全部 Post 資料
   async getPostAll(req, res, next) {
     try {
-      const result = await Post.find();
+      // 時間排序
+      const timeSort = req.query.timeSort == 'asc' ? 'createdAt' : '-createdAt';
+      const result = await Post.find().populate({
+        path: 'user',
+        select: 'name photo',
+      }).sort(timeSort);
       returnDataSuccess(res, '成功取得全部資料', result);
     } catch (err) {
       allError(400, res, err);
@@ -44,7 +49,7 @@ const postsController = {
           postContent: dataFormFront.postContent,
           postImgUrl: dataFormFront.postImgUrl,
         });
-      returnDataSuccess(res, '成功新增一筆資料', result);
+        returnDataSuccess(res, '成功新增一筆資料', result);
       }
     } catch (err) {
       allError(400, res, err);
