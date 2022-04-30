@@ -17,13 +17,29 @@ const userSchema = new mongoose.Schema(
       require: [true, '請輸入您的password'],
       select: false,
     },
-    age: Number,
-    photo: String,
+    age: {
+      type: Number,
+      default: 1,
+    },
+    gender: {
+      type: String,
+      require: [true, '請輸入您的性別'],
+      default: 'male',
+    },
+    photo: {
+      type: String,
+      default: '',
+    },
     passwordReset: {
       title: {
         type: String,
+        default: '',
       },
       answer: { type: String, select: false },
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
     },
   },
   {
