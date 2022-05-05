@@ -8,6 +8,17 @@ const { allError } = require('../services/errorHandlers');
 const postsController = {
   // 取得全部 Post 資料
   async getPostAll(req, res, next) {
+    /* 
+      #swagger.tags = ['Posts - 貼文']
+      #swagger.description = '取得全部 Post 資料'
+      #swagger.response[200] ={
+        description:'貼文資訊', 
+        schema:{
+          "status":true,
+          "data":[{}]
+        }
+      }
+    */
     try {
       // 時間排序
       const timeSort = req.query.timeSort == 'asc' ? 'createdAt' : '-createdAt';
@@ -28,6 +39,10 @@ const postsController = {
   },
   // 取得特定 ID Post 資料
   async getPost(req, res, next) {
+    /* 
+      #swagger.tags = ['Posts - 貼文']
+      #swagger.description = '取得特定 ID Post 資料'
+    */
     const id = req.params.id;
     try {
       const result = await Post.find({ _id: id });
@@ -42,6 +57,9 @@ const postsController = {
   },
   // 新增一筆資料
   async newPost(req, res, next) {
+    /* 
+      #swagger.tags = ['Posts - 貼文']
+    */
     try {
       const dataFormFront = req.body;
       if (
