@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const multiparty = require('multiparty');
 
 //router
 const indexRouter = require('./routes/index');

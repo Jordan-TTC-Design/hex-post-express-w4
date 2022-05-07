@@ -1,45 +1,54 @@
 const express = require('express');
 const router = express.Router();
+const multiparty = require('multiparty');
+const imgur = require('imgur-node-api');
+const dotenv = require('dotenv');
 
+dotenv.config({ path: './config.env' });
 // 上傳圖片
 router.post('/image', async (req, res, next) => {
-  console.log(req.body)
-  // const item = req.body.postImgUrl;
-  // const base64String = item.replace('data:image/jpeg;base64,', '');
-  // const data = {
-  //   image: base64String,
-  //   type: 'base64',
-  // };
-  // axios({
-  //   method: 'POST',
-  //   url: 'https://api.imgur.com/3/image',
-  //   data,
-  //   headers: {
-  //     Authorization: 'Client-ID ef6e862acf052df',
-  //   },
-  // }).then((response) => {
-  //   console.log(response);
-  // })
-  // try {
-  //   const result = await axios.post('https://api.imgur.com/3/image', {
-  //     headers: {
-  //       Authorization: 'Client-ID ef6e862acf052df',
-  //     },
-  //     data
-  // });
-  //   res.status(200).send({
-  //     status:true,
-  //     data:result,
-  //     message:'成功上傳圖片'
-  //   }).end();
-  //   console.log(result);
-  // } catch (err) {
-  //   console.log(err);
-  //   res.status(400).send({
-  //     status:false,
-  //     message:'上傳失敗'
-  //   }).end();
-  // }
+  let form = new multiparty.Form();
+  form.parse(req, async (err, fields, file) => {
+    const imgFile = file.image[0];
+    if (imgFile) {
+      // 設定 app ID
+      imgur.setClientID(process.env.IMGUR_TOKEN);
+      // 取得檔案目錄，上傳至 imgur
+      try {
+        const updateResult = await imgur.upload(imgFile.path, (err, image) => {
+          if (err) {
+            return err;
+          } else {
+            return image.link;
+          }
+        });
+      } catch (err) {
+        res
+          .status(400)
+          .send({
+            status: false,
+            message: err,
+          })
+          .end();
+      }
+      res
+        .status(200)
+        .send({
+          status: true,
+          data: updateResult,
+          message: '成功上傳圖片',
+        })
+        .end();
+    } else {
+      res
+        .status(400)
+        .send({
+          status: false,
+          message: '沒有選擇圖片',
+        })
+        .end();
+    }
+  });
 });
 
 module.exports = router;
