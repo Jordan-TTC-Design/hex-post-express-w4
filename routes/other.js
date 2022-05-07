@@ -14,31 +14,27 @@ router.post('/image', async (req, res, next) => {
       // 設定 app ID
       imgur.setClientID(process.env.IMGUR_TOKEN);
       // 取得檔案目錄，上傳至 imgur
-      try {
-        const updateResult = await imgur.upload(imgFile.path, (err, image) => {
-          if (err) {
-            return err;
-          } else {
-            return image.link;
-          }
-        });
-      } catch (err) {
-        res
-          .status(400)
-          .send({
-            status: false,
-            message: err,
-          })
-          .end();
-      }
-      res
-        .status(200)
-        .send({
-          status: true,
-          data: updateResult,
-          message: '成功上傳圖片',
-        })
-        .end();
+      imgur.upload(imgFile.path, (err, image) => {
+        console.log(image);
+        if (err) {
+          res
+            .status(400)
+            .send({
+              status: false,
+              message: err,
+            })
+            .end();
+        } else {
+          res
+            .status(200)
+            .send({
+              status: true,
+              data: image.data.link,
+              message: '成功上傳圖片',
+            })
+            .end();
+        }
+      });
     } else {
       res
         .status(400)
