@@ -15,13 +15,13 @@ router.post('/image', async (req, res, next) => {
       imgur.setClientID(process.env.IMGUR_TOKEN);
       // 取得檔案目錄，上傳至 imgur
       imgur.upload(imgFile.path, (err, image) => {
-        console.log(image);
-        if (err) {
+        console.log(err, image);
+        if (!image.success) {
           res
             .status(400)
             .send({
               status: 'false',
-              message: err,
+              message: image.data.error,
             })
             .end();
         } else {

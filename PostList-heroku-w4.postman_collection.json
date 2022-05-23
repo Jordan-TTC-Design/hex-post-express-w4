@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "2db4b0da-b907-404a-8bcc-9e1e758b04ec",
+		"name": "PostList-heroku-w4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "取得所有Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://hex-post-w4.herokuapp.com/posts/all?timeSort=asc",
+					"protocol": "https",
+					"host": [
+						"hex-post-w4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						"all"
+					],
+					"query": [
+						{
+							"key": "timeSort",
+							"value": "asc"
+						},
+						{
+							"key": "q",
+							"value": "\b",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得所有User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://hex-post-w4.herokuapp.com/users/all?timeSort=asc&q=",
+					"protocol": "https",
+					"host": [
+						"hex-post-w4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"all"
+					],
+					"query": [
+						{
+							"key": "timeSort",
+							"value": "asc"
+						},
+						{
+							"key": "q",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得單筆Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://hex-post-w4.herokuapp.com/posts/6268e732f2f0ba4e76430326",
+					"protocol": "https",
+					"host": [
+						"hex-post-w4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						"6268e732f2f0ba4e76430326"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增一筆Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"postContent\": \"<p>hello world</p>\",\n            \"postImgUrl\": \"https://images.unsplash.com/photo-1529068755536-a5ade0dcb4e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVvcGxlfGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=60&q=60\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://hex-post-w4.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"hex-post-w4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增一筆User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"name\": \"王小明\",\n            \"email\": \"wang123sssw5@gmail.com\",\n            \"password\": \"J50796003\",\n            \"passwordReset\":{\n                \"title\":\"你的大學是？\",\n                \"answer\":\"台大\"\n            },\n            \"gender\":\"male\",\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://hex-post-w4.herokuapp.com/users/sign-up",
+					"protocol": "https",
+					"host": [
+						"hex-post-w4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除全部Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://hex-post-w4.herokuapp.com/posts/all",
+					"protocol": "https",
+					"host": [
+						"hex-post-w4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除特定Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://hex-post-w4.herokuapp.com/posts/62768104e55e42be426df5",
+					"protocol": "https",
+					"host": [
+						"hex-post-w4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						"62768104e55e42be426df5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
