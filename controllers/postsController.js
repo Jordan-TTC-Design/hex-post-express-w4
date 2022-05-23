@@ -46,7 +46,7 @@ const postsController = {
       const dataFormFront = req.body;
       const textContent =
         dataFormFront.postContent !== undefined &&
-        dataFormFront.postContent.trim()>0;
+        dataFormFront.postContent.trim().length>0;
       const imgUrl =
         dataFormFront.postImgUrl !== undefined &&
         dataFormFront.postImgUrl.trim().length>0;

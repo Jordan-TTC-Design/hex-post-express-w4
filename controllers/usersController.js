@@ -7,9 +7,6 @@ const { allError } = require('../services/errorHandlers');
 const usersController = {
   // 取得全部用戶資料
   async getUserAll(req, res, next) {
-    /* 
-      #swagger.tags = ['Users - 使用者']
-    */
     try {
       // 時間排序
       const timeSort = req.query.timeSort == 'asc' ? 'createdAt' : '-createdAt';
@@ -25,9 +22,6 @@ const usersController = {
   },
   // 創建用戶
   async newUser(req, res, next) {
-    /* 
-      #swagger.tags = ['Users - 使用者']
-    */
     try {
       const dataFormFront = req.body;
       const result = await User.create({
