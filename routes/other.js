@@ -20,7 +20,7 @@ router.post('/image', async (req, res, next) => {
           res
             .status(400)
             .send({
-              status: false,
+              status: 'false',
               message: err,
             })
             .end();
@@ -28,7 +28,7 @@ router.post('/image', async (req, res, next) => {
           res
             .status(200)
             .send({
-              status: true,
+              status: 'success',
               data: image.data.link,
               message: '成功上傳圖片',
             })
@@ -39,7 +39,7 @@ router.post('/image', async (req, res, next) => {
       res
         .status(400)
         .send({
-          status: false,
+          status: 'false',
           message: '沒有選擇圖片',
         })
         .end();

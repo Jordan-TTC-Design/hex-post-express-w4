@@ -2,7 +2,7 @@ function allError(statusNumber, res, message) {
   res
     .status(statusNumber)
     .send({
-      status: false,
+      status: 'false',
       message: message,
     })
     .end();

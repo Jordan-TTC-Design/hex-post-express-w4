@@ -7,10 +7,7 @@ const PostSchema = new mongoose.Schema(
       ref:"user",
       require: [true, 'user為必填資訊'],
     },
-    postContent: {
-      type: String,
-      require: [true, 'postContent為必填資訊'],
-    },
+    postContent: String,
     postImgUrl: String,
     postTags: [{ type: String }],
     postLikes: {
