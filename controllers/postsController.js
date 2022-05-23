@@ -8,17 +8,6 @@ const { allError } = require('../services/errorHandlers');
 const postsController = {
   // 取得全部 Post 資料
   async getPostAll(req, res, next) {
-    /* 
-      #swagger.tags = ['Posts - 貼文']
-      #swagger.description = '取得全部 Post 資料'
-      #swagger.response[200] ={
-        description:'貼文資訊', 
-        schema:{
-          "status":true,
-          "data":[{}]
-        }
-      }
-    */
     try {
       // 時間排序
       const timeSort = req.query.timeSort == 'asc' ? 'createdAt' : '-createdAt';
@@ -39,10 +28,6 @@ const postsController = {
   },
   // 取得特定 ID Post 資料
   async getPost(req, res, next) {
-    /* 
-      #swagger.tags = ['Posts - 貼文']
-      #swagger.description = '取得特定 ID Post 資料'
-    */
     const id = req.params.id;
     try {
       const result = await Post.find({ _id: id });
@@ -57,15 +42,15 @@ const postsController = {
   },
   // 新增一筆資料
   async newPost(req, res, next) {
-    /* 
-      #swagger.tags = ['Posts - 貼文']
-    */
     try {
       const dataFormFront = req.body;
-      if (
-        dataFormFront.postContent.length === 0 &&
-        dataFormFront.postImgUrl.length === 0
-      ) {
+      const textContent =
+        dataFormFront.postContent !== undefined &&
+        dataFormFront.postContent.trim()>0;
+      const imgUrl =
+        dataFormFront.postImgUrl !== undefined &&
+        dataFormFront.postImgUrl.trim().length>0;
+      if (textContent !== true && imgUrl !== true) {
         allError(400, res, '貼文內容和貼文圖片至少有一項須填寫');
       } else {
         const result = await Post.create({
